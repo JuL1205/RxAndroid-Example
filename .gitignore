@@ -37,3 +37,18 @@ captures/
 
 */obj
 */libs/armeabi
+
+
+*.svn*
+.gradle
+local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+./build
+/.idea/
+*.iml
+./*.iml
+gradle*
+build
+gradlew.bat
