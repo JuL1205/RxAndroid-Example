@@ -1,4 +1,5 @@
-# RxDemo
+# RxDemo  
+RxAndroid self-study project
 ## Creator
 * just
 * from
