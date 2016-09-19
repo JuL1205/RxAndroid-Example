@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <Button
-        android:id="@+id/btn_zip"
+    android:layout_height="match_parent"
+    android:padding="15dp">
+    <LinearLayout
+        android:id="@+id/group_choice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="zip"/>
+        android:orientation="horizontal">
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/btn_run"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/run"/>
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/tv_console"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/btn_zip"
+        android:layout_below="@id/group_choice"
         android:textColor="#000000"
         android:textSize="15dp"/>
 

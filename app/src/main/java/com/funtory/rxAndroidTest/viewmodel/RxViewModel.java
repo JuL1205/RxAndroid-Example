@@ -6,6 +6,9 @@ import com.funtory.rxAndroidTest.log.Logg;
 import com.funtory.rxAndroidTest.model.UserFavoriteModel;
 import com.funtory.rxAndroidTest.model.UserInfoModel;
 
+import java.util.Arrays;
+import java.util.List;
+
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -17,6 +20,26 @@ import rx.schedulers.Schedulers;
  */
 
 public class RxViewModel {
+
+    /* 생성자 */
+    public Observable<List<Integer>> just(){
+        /*
+         * from 과는 다르게, collector 자체가 한번 발행된다.
+         */
+        return Observable.just(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}));
+    }
+
+    public Observable<Integer> from(){
+        /*
+         * just 와는 다르게, collector 안의 값 하나하나가 각각 발행된다.
+         */
+        return Observable.from(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}));
+    }
+
+
+
+
+    /* 연산자 */
     public Observable<String> zip() {
         /*
          * 시나리오
@@ -29,7 +52,7 @@ public class RxViewModel {
         Observable<UserInfoModel> getUserInfoObs = Observable.create((Observable.OnSubscribe<UserInfoModel>) subscriber -> {
             Logg.i("getUserInfoObs call");
 
-            for(long i = 0 ; i < 100000000L ; i++){ //네트워크 시간 지연 모사
+            for(int i = 0 ; i < 10000000 ; i++){ //네트워크 시간 지연 모사
 
             }
 

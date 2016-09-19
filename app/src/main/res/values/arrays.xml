@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="operators">
+        <item>just</item>
+        <item>from</item>
+        <item>zip</item>
+    </string-array>
+</resources>
