@@ -26,7 +26,7 @@ import rx.subjects.PublishSubject;
 
 public class RxViewModel {
 
-    /* 생성자 */
+    /* creator */
     public Observable<List<Integer>> just(){
         /*
          * from 과는 다르게, collector 자체가 한번 발행된다.
@@ -44,7 +44,7 @@ public class RxViewModel {
 
 
 
-    /* 연산자 */
+    /* operator */
     public Observable<Integer> map(){
         /*
          * 관찰한 observable 의 data를 변형한다.
