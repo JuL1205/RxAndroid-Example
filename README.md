@@ -13,3 +13,6 @@ RxAndroid self-study project
 ## Subject
 * publishSubject
 * behaviorSubject
+
+## *Download*
+https://play.google.com/store/apps/details?id=com.funtory.rxAndroidTest
