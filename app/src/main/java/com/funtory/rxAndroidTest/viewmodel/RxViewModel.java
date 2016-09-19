@@ -11,10 +11,14 @@ import java.util.List;
 
 import rx.Observable;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.functions.Func2;
 import rx.schedulers.Schedulers;
+import rx.subjects.BehaviorSubject;
+import rx.subjects.PublishSubject;
 
 /**
  * Created by JuL on 2016. 9. 19..
@@ -67,9 +71,6 @@ public class RxViewModel {
         return from().concatMap(integer -> Observable.just(integer * integer).subscribeOn(Schedulers.computation())).observeOn(AndroidSchedulers.mainThread());
     }
 
-
-
-
     public Observable<String> zip() {
         /*
          * 시나리오
@@ -109,5 +110,38 @@ public class RxViewModel {
             Logg.i("userFavoriteModel = " + userFavoriteModel);
             return "userInfoModel = " + userInfoModel + "\n" + "userFavoriteModel = " + userFavoriteModel;
         }).observeOn(AndroidSchedulers.mainThread());
+    }
+
+
+
+
+
+    /* subject */
+    public void publishSubject(Action1<String> onNext){
+        /*
+         * 구독한 시점 이후 발행된 데이터부터 얻을 수 있다.
+         * 즉, 6부터 얻을 수 있음.
+         */
+        PublishSubject<String> publishSubject = PublishSubject.create();
+        Observable.range(1, 10).subscribe(integer -> {
+            publishSubject.onNext(String.valueOf(integer));
+            if(integer == 5){
+                publishSubject.subscribe(onNext);
+            }
+        });
+    }
+
+    public void behaviorSubject(Action1<String> onNext){
+        /*
+         * 구독한 시점 바로 이전에 발행된 데이터부터 얻을 수 있다.
+         * 즉, 5부터 얻을 수 있음.
+         */
+        BehaviorSubject<String> behaviorSubject = BehaviorSubject.create();
+        Observable.range(1, 10).subscribe(integer -> {
+            behaviorSubject.onNext(String.valueOf(integer));
+            if(integer == 5){
+                behaviorSubject.subscribe(onNext);
+            }
+        });
     }
 }

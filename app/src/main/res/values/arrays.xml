@@ -7,5 +7,7 @@
         <item>flatMap</item>
         <item>concatMap</item>
         <item>zip</item>
+        <item>publishSubject</item>
+        <item>behaviorSubject</item>
     </string-array>
 </resources>
