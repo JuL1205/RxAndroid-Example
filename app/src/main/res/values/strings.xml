@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">RxAndroidTest</string>
+    <string name="app_name">RxDemo</string>
     <string name="run">실행!</string>
 </resources>

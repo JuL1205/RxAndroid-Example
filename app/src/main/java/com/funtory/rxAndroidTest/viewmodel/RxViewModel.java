@@ -12,6 +12,7 @@ import java.util.List;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 
@@ -40,6 +41,35 @@ public class RxViewModel {
 
 
     /* 연산자 */
+    public Observable<Integer> map(){
+        /*
+         * 관찰한 observable 의 data를 변형한다.
+         * flatMap 과는 다르게, 어떤 object 로도 변형할 수 있고, 변형된 형태 그대로 subscriber에게 발행된다.
+         */
+        return from().map(integer -> (integer * integer)).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<Integer> flatMap(){
+        /*
+         * 관찰한 observable 의 data를 변형한다.
+         * map 과는 다르게, observable 로만 변형이 가능하고, 변형된 observable 안의 값이 subscriber에게 발행된다.
+         * concatMap 과는 다르게, 순서보장이 안된다.
+         */
+        return from().flatMap(integer -> Observable.just(integer * integer).subscribeOn(Schedulers.computation())).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<Integer> concatMap(){
+        /*
+         * 관찰한 observable 의 data를 변형한다.
+         * map 과는 다르게, observable 로만 변형이 가능하고, 변형된 observable 안의 값이 subscriber에게 발행된다.
+         * flatMap 과는 다르게, 순서가 보장된다.
+         */
+        return from().concatMap(integer -> Observable.just(integer * integer).subscribeOn(Schedulers.computation())).observeOn(AndroidSchedulers.mainThread());
+    }
+
+
+
+
     public Observable<String> zip() {
         /*
          * 시나리오

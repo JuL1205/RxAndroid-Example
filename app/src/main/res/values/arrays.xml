@@ -3,6 +3,9 @@
     <string-array name="operators">
         <item>just</item>
         <item>from</item>
+        <item>map</item>
+        <item>flatMap</item>
+        <item>concatMap</item>
         <item>zip</item>
     </string-array>
 </resources>

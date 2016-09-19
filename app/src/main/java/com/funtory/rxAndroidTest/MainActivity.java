@@ -3,6 +3,7 @@ package com.funtory.rxAndroidTest;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -69,12 +70,7 @@ public class MainActivity extends AppCompatActivity {
     @OnClick({R.id.btn_run})
     void onClick(View v){
         if(v.getId() == R.id.btn_run){
-            if(selectedOp.equalsIgnoreCase("zip")){
-                rxViewModel.zip().subscribe(s -> {
-                    tvConsole.append(s);
-                    tvConsole.append("\n");
-                });
-            } else if(selectedOp.equalsIgnoreCase("just")){
+            if(selectedOp.equalsIgnoreCase("just")){
                 rxViewModel.just().subscribe(integers -> {
                     tvConsole.append(integers.toString());
                     tvConsole.append("\n");
@@ -82,6 +78,31 @@ public class MainActivity extends AppCompatActivity {
             } else if(selectedOp.equalsIgnoreCase("from")){
                 rxViewModel.from().subscribe(integer -> {
                     tvConsole.append(String.valueOf(integer));
+                    tvConsole.append("\n");
+                });
+            } else if(selectedOp.equalsIgnoreCase("from")){
+                rxViewModel.from().subscribe(integer -> {
+                    tvConsole.append(String.valueOf(integer));
+                    tvConsole.append("\n");
+                });
+            } else if(selectedOp.equalsIgnoreCase("map")){
+                rxViewModel.map().subscribe(integer -> {
+                    tvConsole.append(String.valueOf(integer));
+                    tvConsole.append("\n");
+                });
+            } else if(selectedOp.equalsIgnoreCase("flatMap")){
+                rxViewModel.flatMap().subscribe(integer -> {
+                    tvConsole.append(String.valueOf(integer));
+                    tvConsole.append("\n");
+                });
+            } else if(selectedOp.equalsIgnoreCase("concatMap")){
+                rxViewModel.concatMap().subscribe(integer -> {
+                    tvConsole.append(String.valueOf(integer));
+                    tvConsole.append("\n");
+                });
+            } else if(selectedOp.equalsIgnoreCase("zip")){
+                rxViewModel.zip().subscribe(s -> {
+                    tvConsole.append(s);
                     tvConsole.append("\n");
                 });
             }
