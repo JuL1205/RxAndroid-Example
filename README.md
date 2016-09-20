@@ -5,6 +5,7 @@ RxAndroid self-study project
 * from
 * zip
 * combineLatest
+* range
 
 ## Operator
 * map
