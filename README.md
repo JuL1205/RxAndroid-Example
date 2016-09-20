@@ -13,6 +13,7 @@ RxAndroid self-study project
 * map
 * flatMap
 * concatMap
+* debounce
 
 ## Subject
 * publishSubject
