@@ -95,6 +95,14 @@ public class RxViewModel {
         return Observable.combineLatest(check1, check2, (bool1, bool2) -> "Check1 : "+bool1+"\nCheck2 : "+bool2+"\nResult : "+ (bool1 & bool2));
     }
 
+    public Observable<Integer> range(){
+        /*
+         * 지정된 횟수 만큼 integer 값이 발행된다.
+         * 이 예제에서는, 0부터 9까지 총 10번의 이벤트가 발행됨.
+         */
+        return Observable.range(0, 10);
+    }
+
 
 
     /* operator */

@@ -81,33 +81,33 @@ public class MainActivity extends AppCompatActivity {
     void onClick(View v){
         if(v.getId() == R.id.btn_run){
             if(selectedOp.equalsIgnoreCase("just")){
-                subscriptions.add(rxViewModel.just().subscribe(integers -> {
-                    tvConsole.append(integers.toString());
+                subscriptions.add(rxViewModel.just().subscribe(is -> {
+                    tvConsole.append(is.toString());
                     tvConsole.append("\n");
                 }));
             } else if(selectedOp.equalsIgnoreCase("from")){
-                subscriptions.add(rxViewModel.from().subscribe(integer -> {
-                    tvConsole.append(String.valueOf(integer));
+                subscriptions.add(rxViewModel.from().subscribe(i -> {
+                    tvConsole.append(String.valueOf(i));
                     tvConsole.append("\n");
                 }));
             } else if(selectedOp.equalsIgnoreCase("from")){
-                subscriptions.add(rxViewModel.from().subscribe(integer -> {
-                    tvConsole.append(String.valueOf(integer));
+                subscriptions.add(rxViewModel.from().subscribe(i -> {
+                    tvConsole.append(String.valueOf(i));
                     tvConsole.append("\n");
                 }));
             } else if(selectedOp.equalsIgnoreCase("map")){
-                subscriptions.add(rxViewModel.map().subscribe(integer -> {
-                    tvConsole.append(String.valueOf(integer));
+                subscriptions.add(rxViewModel.map().subscribe(i -> {
+                    tvConsole.append(String.valueOf(i));
                     tvConsole.append("\n");
                 }));
             } else if(selectedOp.equalsIgnoreCase("flatMap")){
-                subscriptions.add(rxViewModel.flatMap().subscribe(integer -> {
-                    tvConsole.append(String.valueOf(integer));
+                subscriptions.add(rxViewModel.flatMap().subscribe(i -> {
+                    tvConsole.append(String.valueOf(i));
                     tvConsole.append("\n");
                 }));
             } else if(selectedOp.equalsIgnoreCase("concatMap")){
-                subscriptions.add(rxViewModel.concatMap().subscribe(integer -> {
-                    tvConsole.append(String.valueOf(integer));
+                subscriptions.add(rxViewModel.concatMap().subscribe(i -> {
+                    tvConsole.append(String.valueOf(i));
                     tvConsole.append("\n");
                 }));
             } else if(selectedOp.equalsIgnoreCase("zip")){
@@ -119,6 +119,11 @@ public class MainActivity extends AppCompatActivity {
                 groupCheck.setVisibility(View.VISIBLE);
                 subscriptions.add(rxViewModel.combineLatest(cbCheck1, cbCheck2).subscribe(s -> {
                     tvConsole.append(s);
+                    tvConsole.append("\n");
+                }));
+            } else if(selectedOp.equalsIgnoreCase("range")){
+                subscriptions.add(rxViewModel.range().subscribe(i -> {
+                    tvConsole.append(String.valueOf(i));
                     tvConsole.append("\n");
                 }));
             } else if(selectedOp.equalsIgnoreCase("publishSubject")){
