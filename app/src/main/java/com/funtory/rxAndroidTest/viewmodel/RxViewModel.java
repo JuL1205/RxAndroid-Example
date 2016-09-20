@@ -109,10 +109,16 @@ public class RxViewModel {
          * 지정된 간격으로 계속 해서 이벤트가 발생된다.
          * 기본적으로 main thread 가 아닌, computation thread 에서 동작하는 것에 주의하자.
          */
-        return Observable.interval(1, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread());
+        return Observable.interval(1000, TimeUnit.MILLISECONDS).observeOn(AndroidSchedulers.mainThread());
     }
 
-    
+    public Observable<Long> timer(){
+        /*
+         * 지정된 시간 후에 한번 이벤트가 발생된다.
+         * 기본적으로 main thread 가 아닌, computation thread 에서 동작하는 것에 주의하자.
+         */
+        return Observable.timer(1000, TimeUnit.MILLISECONDS).observeOn(AndroidSchedulers.mainThread());
+    }
 
 
 

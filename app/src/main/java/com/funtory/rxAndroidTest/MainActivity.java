@@ -129,7 +129,11 @@ public class MainActivity extends AppCompatActivity {
                 }));
             } else if(selectedOp.equalsIgnoreCase("interval")){
                 subscriptions.add(rxViewModel.interval().subscribe(l -> {
-                    Logg.i("l = "+l);
+                    tvConsole.append(String.valueOf(l));
+                    tvConsole.append("\n");
+                }));
+            } else if(selectedOp.equalsIgnoreCase("timer")){
+                subscriptions.add(rxViewModel.timer().subscribe(l -> {
                     tvConsole.append(String.valueOf(l));
                     tvConsole.append("\n");
                 }));
