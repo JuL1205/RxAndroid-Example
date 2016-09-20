@@ -6,6 +6,8 @@ RxAndroid self-study project
 * zip
 * combineLatest
 * range
+* interval
+* timer
 
 ## Operator
 * map
