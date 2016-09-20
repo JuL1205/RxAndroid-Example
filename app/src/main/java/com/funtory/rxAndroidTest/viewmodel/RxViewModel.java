@@ -10,6 +10,7 @@ import com.jakewharton.rxbinding.widget.RxCompoundButton;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -97,11 +98,25 @@ public class RxViewModel {
 
     public Observable<Integer> range(){
         /*
-         * 지정된 횟수 만큼 integer 값이 발행된다.
+         * 지정된 횟수 만큼 integer 값이 발행된다. for문 대용으로 사용해도 될 듯 하다.
          * 이 예제에서는, 0부터 9까지 총 10번의 이벤트가 발행됨.
          */
         return Observable.range(0, 10);
     }
+
+    public Observable<Long> interval(){
+        /*
+         * 지정된 간격으로 계속 해서 이벤트가 발생된다.
+         * 기본적으로 main thread 가 아닌, computation thread 에서 동작하는 것에 주의하자.
+         */
+        return Observable.interval(1, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    
+
+
+
+
 
 
 
@@ -131,6 +146,9 @@ public class RxViewModel {
          */
         return from().concatMap(integer -> Observable.just(integer * integer).subscribeOn(Schedulers.computation())).observeOn(AndroidSchedulers.mainThread());
     }
+
+
+
 
 
 

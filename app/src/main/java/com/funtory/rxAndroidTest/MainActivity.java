@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.funtory.rxAndroidTest.log.Logg;
 import com.funtory.rxAndroidTest.viewmodel.RxViewModel;
 
 import butterknife.Bind;
@@ -124,6 +125,12 @@ public class MainActivity extends AppCompatActivity {
             } else if(selectedOp.equalsIgnoreCase("range")){
                 subscriptions.add(rxViewModel.range().subscribe(i -> {
                     tvConsole.append(String.valueOf(i));
+                    tvConsole.append("\n");
+                }));
+            } else if(selectedOp.equalsIgnoreCase("interval")){
+                subscriptions.add(rxViewModel.interval().subscribe(l -> {
+                    Logg.i("l = "+l);
+                    tvConsole.append(String.valueOf(l));
                     tvConsole.append("\n");
                 }));
             } else if(selectedOp.equalsIgnoreCase("publishSubject")){

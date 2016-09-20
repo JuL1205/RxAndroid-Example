@@ -6,6 +6,7 @@
         <item>zip</item>
         <item>combineLatest</item>
         <item>range</item>
+        <item>interval</item>
         <item>map</item>
         <item>flatMap</item>
         <item>concatMap</item>
