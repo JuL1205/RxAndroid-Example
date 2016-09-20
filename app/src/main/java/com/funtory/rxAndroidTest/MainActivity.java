@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -29,6 +32,15 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.spinner)
     Spinner spinner;
 
+    @Bind(R.id.group_check)
+    LinearLayout groupCheck;
+
+    @Bind(R.id.cb_check1)
+    CheckBox cbCheck1;
+
+    @Bind(R.id.cb_check2)
+    CheckBox cbCheck2;
+
     private RxViewModel rxViewModel = new RxViewModel();
     private String selectedOp;
 
@@ -42,9 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-
         initViews();
-
     }
 
     private void initViews(){
@@ -58,8 +68,13 @@ public class MainActivity extends AppCompatActivity {
     @OnItemSelected(R.id.spinner)
     void onItemSelected(AdapterView<?> parent, View view, int position, long id){
         selectedOp = (String) parent.getItemAtPosition(position);
+        initValues();
+    }
+
+    private void initValues(){
         tvConsole.setText("");
         subscriptions.clear();
+        groupCheck.setVisibility(View.GONE);
     }
 
     @OnClick({R.id.btn_run})
@@ -97,6 +112,12 @@ public class MainActivity extends AppCompatActivity {
                 }));
             } else if(selectedOp.equalsIgnoreCase("zip")){
                 subscriptions.add(rxViewModel.zip().subscribe(s -> {
+                    tvConsole.append(s);
+                    tvConsole.append("\n");
+                }));
+            } else if(selectedOp.equalsIgnoreCase("combineLatest")){
+                groupCheck.setVisibility(View.VISIBLE);
+                subscriptions.add(rxViewModel.combineLatest(cbCheck1, cbCheck2).subscribe(s -> {
                     tvConsole.append(s);
                     tvConsole.append("\n");
                 }));

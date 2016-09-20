@@ -1,10 +1,12 @@
 package com.funtory.rxAndroidTest.viewmodel;
 
 import android.util.Log;
+import android.widget.CheckBox;
 
 import com.funtory.rxAndroidTest.log.Logg;
 import com.funtory.rxAndroidTest.model.UserFavoriteModel;
 import com.funtory.rxAndroidTest.model.UserInfoModel;
+import com.jakewharton.rxbinding.widget.RxCompoundButton;
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,36 +41,6 @@ public class RxViewModel {
          * just 와는 다르게, collector 안의 값 하나하나가 각각 발행된다.
          */
         return Observable.from(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}));
-    }
-
-
-
-
-    /* operator */
-    public Observable<Integer> map(){
-        /*
-         * 관찰한 observable 의 data를 변형한다.
-         * flatMap 과는 다르게, 어떤 object 로도 변형할 수 있고, 변형된 형태 그대로 subscriber에게 발행된다.
-         */
-        return from().map(integer -> (integer * integer)).observeOn(AndroidSchedulers.mainThread());
-    }
-
-    public Observable<Integer> flatMap(){
-        /*
-         * 관찰한 observable 의 data를 변형한다.
-         * map 과는 다르게, observable 로만 변형이 가능하고, 변형된 observable 안의 값이 subscriber에게 발행된다.
-         * concatMap 과는 다르게, 순서보장이 안된다.
-         */
-        return from().flatMap(integer -> Observable.just(integer * integer).subscribeOn(Schedulers.computation())).observeOn(AndroidSchedulers.mainThread());
-    }
-
-    public Observable<Integer> concatMap(){
-        /*
-         * 관찰한 observable 의 data를 변형한다.
-         * map 과는 다르게, observable 로만 변형이 가능하고, 변형된 observable 안의 값이 subscriber에게 발행된다.
-         * flatMap 과는 다르게, 순서가 보장된다.
-         */
-        return from().concatMap(integer -> Observable.just(integer * integer).subscribeOn(Schedulers.computation())).observeOn(AndroidSchedulers.mainThread());
     }
 
     public Observable<String> zip() {
@@ -110,6 +82,46 @@ public class RxViewModel {
             Logg.i("userFavoriteModel = " + userFavoriteModel);
             return "userInfoModel = " + userInfoModel + "\n" + "userFavoriteModel = " + userFavoriteModel;
         }).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<String> combineLatest(CheckBox cb1, CheckBox cb2) {
+        /*
+         * 2개의 observable에서 데이터가 발급될 때마다 이벤트가 들어온다.
+         * 이 예제에서는, 각 체크박스의 상태가 변경 될때마다 이벤트가 발생되고, 두 체크 상태를 & 한 값이 결과값이 된다.
+         */
+        Observable<Boolean> check1 = RxCompoundButton.checkedChanges(cb1);
+        Observable<Boolean> check2 = RxCompoundButton.checkedChanges(cb2);
+
+        return Observable.combineLatest(check1, check2, (bool1, bool2) -> "Check1 : "+bool1+"\nCheck2 : "+bool2+"\nResult : "+ (bool1 & bool2));
+    }
+
+
+
+    /* operator */
+    public Observable<Integer> map(){
+        /*
+         * 관찰한 observable 의 data를 변형한다.
+         * flatMap 과는 다르게, 어떤 object 로도 변형할 수 있고, 변형된 형태 그대로 subscriber에게 발행된다.
+         */
+        return from().map(integer -> (integer * integer)).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<Integer> flatMap(){
+        /*
+         * 관찰한 observable 의 data를 변형한다.
+         * map 과는 다르게, observable 로만 변형이 가능하고, 변형된 observable 안의 값이 subscriber에게 발행된다.
+         * concatMap 과는 다르게, 순서보장이 안된다.
+         */
+        return from().flatMap(integer -> Observable.just(integer * integer).subscribeOn(Schedulers.computation())).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<Integer> concatMap(){
+        /*
+         * 관찰한 observable 의 data를 변형한다.
+         * map 과는 다르게, observable 로만 변형이 가능하고, 변형된 observable 안의 값이 subscriber에게 발행된다.
+         * flatMap 과는 다르게, 순서가 보장된다.
+         */
+        return from().concatMap(integer -> Observable.just(integer * integer).subscribeOn(Schedulers.computation())).observeOn(AndroidSchedulers.mainThread());
     }
 
 

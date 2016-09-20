@@ -3,10 +3,11 @@
     <string-array name="operators">
         <item>just</item>
         <item>from</item>
+        <item>zip</item>
+        <item>combineLatest</item>
         <item>map</item>
         <item>flatMap</item>
         <item>concatMap</item>
-        <item>zip</item>
         <item>publishSubject</item>
         <item>behaviorSubject</item>
     </string-array>

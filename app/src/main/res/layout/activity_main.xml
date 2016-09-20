@@ -7,17 +7,40 @@
         android:id="@+id/group_choice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <Button
-            android:id="@+id/btn_run"
-            android:layout_width="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/run"/>
+            android:orientation="horizontal">
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/btn_run"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/run"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/group_check"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+            <CheckBox
+                android:id="@+id/cb_check1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Check1"/>
+            <CheckBox
+                android:id="@+id/cb_check2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Check2"/>
+        </LinearLayout>
     </LinearLayout>
+
 
 
     <ScrollView
