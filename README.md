@@ -3,12 +3,12 @@ RxAndroid self-study project
 ## Creator
 * just
 * from
+* zip
 
 ## Operator
 * map
 * flatMap
 * concatMap
-* zip
 
 ## Subject
 * publishSubject
