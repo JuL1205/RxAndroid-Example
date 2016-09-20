@@ -4,6 +4,7 @@ RxAndroid self-study project
 * just
 * from
 * zip
+* combineLatest
 
 ## Operator
 * map
