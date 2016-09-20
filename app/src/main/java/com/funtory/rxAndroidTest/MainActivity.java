@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         initViews();
+
+        rxViewModel.debounce();
     }
 
     private void initViews(){
@@ -135,6 +137,11 @@ public class MainActivity extends AppCompatActivity {
             } else if(selectedOp.equalsIgnoreCase("timer")){
                 subscriptions.add(rxViewModel.timer().subscribe(l -> {
                     tvConsole.append(String.valueOf(l));
+                    tvConsole.append("\n");
+                }));
+            } else if(selectedOp.equalsIgnoreCase("debounce")){
+                subscriptions.add(rxViewModel.debounce().subscribe(s -> {
+                    tvConsole.append(s);
                     tvConsole.append("\n");
                 }));
             } else if(selectedOp.equalsIgnoreCase("publishSubject")){

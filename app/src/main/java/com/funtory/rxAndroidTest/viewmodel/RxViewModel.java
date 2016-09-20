@@ -10,13 +10,16 @@ import com.jakewharton.rxbinding.widget.RxCompoundButton;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
 import rx.functions.Action1;
+import rx.functions.Func0;
 import rx.functions.Func1;
 import rx.functions.Func2;
 import rx.schedulers.Schedulers;
@@ -33,6 +36,7 @@ public class RxViewModel {
     public Observable<List<Integer>> just(){
         /*
          * from 과는 다르게, collector 자체가 한번 발행된다.
+         * onComplete가 자동 호출 된다.
          */
         return Observable.just(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}));
     }
@@ -40,6 +44,7 @@ public class RxViewModel {
     public Observable<Integer> from(){
         /*
          * just 와는 다르게, collector 안의 값 하나하나가 각각 발행된다.
+         * onComplete가 자동 호출 된다.
          */
         return Observable.from(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}));
     }
@@ -154,6 +159,34 @@ public class RxViewModel {
     }
 
 
+    public Observable<String> debounce(){
+        /*
+         * 마지막으로 아이템이 발행되고 난 후, 주어진 시간만큼이 지나고 나면 이벤트가 발생한다.
+         * onComplete가 호출되면 그 즉시 마지막 아이템으로 이벤트가 발생한다.
+         *
+         * 이 예제에서는, debounce에서 주어진 시간은 2.5초이기 때문에 sleepTime이 2.5초보다 작을 경우 마지막 아이템인 c에 대해서만 이벤트가 발생할 것이다.
+         * 그 외의 경우 a,b,c 모두 이벤트가 발생하게 될 것이다.
+         */
+        Random random = new Random(System.currentTimeMillis());
+        int sleepTime = random.nextInt(4);
+
+        return Observable.create(new Observable.OnSubscribe<String>() {
+            @Override
+            public void call(Subscriber<? super String> subscriber) {
+                subscriber.onNext("a [sleep : " + sleepTime + "sec, debounce : 2.5sec]");
+                try {
+                    Thread.sleep(sleepTime * 1000);
+                } catch (InterruptedException e) {
+                }
+                subscriber.onNext("b [sleep : " + sleepTime + "sec, debounce : 2.5sec]");
+                try {
+                    Thread.sleep(sleepTime * 1000);
+                } catch (InterruptedException e) {
+                }
+                subscriber.onNext("c [sleep : " + sleepTime + "sec, debounce : 2.5sec]");
+            }
+        }).debounce(2500, TimeUnit.MILLISECONDS).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread());
+    }
 
 
 

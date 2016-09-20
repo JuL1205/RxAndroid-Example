@@ -11,6 +11,7 @@
         <item>map</item>
         <item>flatMap</item>
         <item>concatMap</item>
+        <item>debounce</item>
         <item>publishSubject</item>
         <item>behaviorSubject</item>
     </string-array>
