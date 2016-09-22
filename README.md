@@ -23,4 +23,4 @@ RxAndroid example project
 https://play.google.com/store/apps/details?id=com.funtory.rxAndroidTest
 
 
-[![Get it on Google Play](https://raw.github.com/chrisbanes/PhotoView/master/art/google-play-badge-small.png)](https://play.google.com/store/apps/details?id=com.funtory.rxAndroidTest)
+[![Get it on Google Play](https://play.google.com/intl/en_us/badges/images/badge_new.png)](https://play.google.com/store/apps/details?id=com.funtory.rxAndroidTest)
